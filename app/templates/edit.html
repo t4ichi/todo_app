@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODOアプリ</title>
+</head>
+<body>
+    <h1>TODOリスト</h1>
+    <form action="{{ url_for('main.update_task',task_id=task.id) }}" method="post">
+        <p>タイトル</p>
+        <input type="text" name="title" placeholder="新しいタスク" value="{{task.title}}">
+
+        <p>概要</p>
+        <input type="text" name="description" maxlength="200" placeholder="タスクの説明" value="{{task.description}}">
+        
+        <p>DONE</p>
+        <input type="checkbox" name="done" value="true" {{ 'checked' if task.done else '' }}>
+        
+        <p>お気に入り</p>
+        <input type="checkbox" name="favorite" value="true" {{ 'checked' if task.favorite else '' }}>
+
+        <p></p>
+        <input type="submit" value="編集">
+    </form>
+</body>
+</html>
