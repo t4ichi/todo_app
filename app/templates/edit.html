@@ -1,27 +1,59 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TODOアプリ</title>
-</head>
-<body>
-    <h1>TODOリスト</h1>
-    <form action="{{ url_for('main.update_task',task_id=task.id) }}" method="post">
-        <p>タイトル</p>
-        <input type="text" name="title" placeholder="新しいタスク" value="{{task.title}}">
+{% extends 'layout.html' %}
+{% block body %}
+<!-- Form -->
+<form action="{{ url_for('main.update_task',task_id=task.id) }}" method="post">
+    <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+        <div class="mx-auto max-w-2xl">
+            <div class="text-center">
+            <h2 class="text-xl text-gray-800 font-bold sm:text-3xl dark:text-white">
+                Edit Task
+            </h2>
+        </div>
+    
+        <!-- Card -->
+        <div class="mt-5 p-4 relative z-10 bg-white border rounded-xl sm:mt-10 md:p-10 dark:bg-neutral-900 dark:border-neutral-700">
+            <!-- Title -->
+            <div class="mb-4 sm:mb-8">
+                <label for="hs-feedback-post-comment-name-1" class="block mb-2 text-sm font-medium dark:text-white">Title</label>
+                <input type="text" name="title" value="{{task.title}}" value="true" {{ 'checked' if task.done else '' }} id="hs-feedback-post-comment-name-1" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Title">
+            </div>
+    
+            <!-- Description -->
+            <div>
+                <label for="hs-feedback-post-comment-textarea-1" class="block mb-2 text-sm font-medium dark:text-white">Description</label>
+                <div class="mt-1">
+                    <textarea id="hs-feedback-post-comment-textarea-1" name="description" value="{{task.description}}" rows="3" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Leave your description here..."></textarea>
+                </div>
+            </div>
 
-        <p>概要</p>
-        <input type="text" name="description" maxlength="200" placeholder="タスクの説明" value="{{task.description}}">
-        
-        <p>DONE</p>
-        <input type="checkbox" name="done" value="true" {{ 'checked' if task.done else '' }}>
-        
-        <p>お気に入り</p>
-        <input type="checkbox" name="favorite" value="true" {{ 'checked' if task.favorite else '' }}>
+            <div class="grid sm:grid-cols-2 gap-2">
+                <!-- Done -->
+                <label for="hs-checkbox-in-form" class="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400">
+                    <input type="checkbox" name="done" value="true"  {{ 'checked' if task.done else '' }} class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-checkbox-in-form">
+                    <span class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Done</span>
+                </label>
+                
+                <!-- Favorite -->
+                <label for="hs-checkbox-checked-in-form" class="flex p-3 w-full bg-white border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400">
+                    <input type="checkbox" name="favorite" value="true" {{ 'checked' if task.favorite else '' }} class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-checkbox-checked-in-form" checked="">
+                    <span class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Favorite</span>
+                </label>
+            </div>
+            
 
-        <p></p>
-        <input type="submit" value="編集">
-    </form>
-</body>
-</html>
+            <!-- Submit -->
+            <div class="mt-6 grid">
+                <button 
+                    type="submit" 
+                    class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                    Update
+                </button>
+            </div>
+    
+            
+        </div>
+        <!-- End Card -->
+    </div>
+</form>
+<!-- End Form -->
+{% endblock %}

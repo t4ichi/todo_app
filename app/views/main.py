@@ -55,9 +55,13 @@ def update_task(task_id):
     return redirect(url_for('main.index'))
 
 # =========================================
-# 
+#  routes
 # =========================================
 @main.route('/<int:task_id>/edit/', methods=['GET'])
 def edit_task(task_id):
     task = Task.query.get(task_id)
     return render_template('edit.html', task=task)
+
+@main.route('/add', methods=['GET'])
+def show_add_task():
+    return render_template('add.html')

@@ -7,7 +7,9 @@ class Task(db.Model):
     description = db.Column(db.String(200), nullable=True)
     done = db.Column(db.Boolean, default=False)
     favorite = db.Column(db.Integer, default=0)
-    
+    created_date = db.Column(db.DateTime, server_default=db.func.now())
+    updated_date = db.Column(db.DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
+        
     def __repr__(self):
         return '<Task id:{} title:{} description:{} done:{} favorite:{}>'.format(
             self.id, self.title, self.description, self.done, self.favorite)
