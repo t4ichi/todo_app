@@ -9,7 +9,8 @@ class Task(db.Model):
     favorite = db.Column(db.Integer, default=0)
     created_date = db.Column(db.DateTime, server_default=db.func.now())
     updated_date = db.Column(db.DateTime, server_default=db.func.now(), server_onupdate=db.func.now())
-        
+    creator_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
     def __repr__(self):
-        return '<Task id:{} title:{} description:{} done:{} favorite:{}>'.format(
-            self.id, self.title, self.description, self.done, self.favorite)
+        return '<Task id:{} title:{} description:{} done:{} favorite:{} creator_id:{}>'.format(
+            self.id, self.title, self.description, self.done, self.favorite, self.creator_id)

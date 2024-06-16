@@ -10,12 +10,13 @@
             <!-- Header -->
             <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200 dark:border-neutral-700">
                 <div>
-                <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
+                <!-- <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
                     List
-                </h2>
+                </h2> -->
                 </div>
 
                 <div>
+                {% if session.user_id %}
                 <div class="inline-flex gap-x-2">
                     <a 
                         class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" 
@@ -25,6 +26,7 @@
                     </a>
                 </div>
                 </div>
+                {% endif %}
             </div>
             <!-- End Header -->
 
@@ -56,6 +58,13 @@
                         <div class="flex items-center gap-x-2">
                             <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
                             Favorite
+                            </span>
+                        </div>
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-start">
+                        <div class="flex items-center gap-x-2">
+                            <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 dark:text-neutral-200">
+                            Creator
                             </span>
                         </div>
                     </th>
@@ -104,6 +113,13 @@
                         </div>
                         </td>
                         
+                        <!-- Creator -->
+                        <td class="h-px w-72 whitespace-nowrap">
+                            <div class="px-6 py-3">
+                                <span class="block text-sm text-gray-500 dark:text-neutral-500">{{task.creator_name}}</span>
+                            </div>
+                        </td>
+
                         <!-- Favorite -->
                         <td class="size-px whitespace-nowrap">
                             <div class="ps-6 py-3">
@@ -113,15 +129,15 @@
                                 </label>
                             </div>
                         </td>
-                        
+
                         <!-- Created Time -->
                         <td class="size-px whitespace-nowrap">
                         <div class="px-6 py-3">
                             <span class="text-sm text-gray-500 dark:text-neutral-500">{{task.created_date}}</span>
                         </div>
-    
+                        </td>    
+
                         <!-- Edit -->
-                        </td>
                         <td class="size-px whitespace-nowrap">
                         <div class="px-6 py-1.5">
                             <a 
